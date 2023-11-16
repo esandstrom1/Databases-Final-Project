@@ -1,4 +1,4 @@
-Year,113 Cause Name,Cause Name,State,Deaths,Age-adjusted Death Rate,id
+Year,Cause_Name_ext,Cause_Name,State,Deaths,Age-adjusted_Death_Rate,id
 2017,"Accidents (unintentional injuries) (V01-X59,Y85-Y86)",Unintentional injuries,United States,169936,49.4,1
 2017,"Accidents (unintentional injuries) (V01-X59,Y85-Y86)",Unintentional injuries,Alabama,2703,53.8,2
 2017,"Accidents (unintentional injuries) (V01-X59,Y85-Y86)",Unintentional injuries,Alaska,436,63.7,3
