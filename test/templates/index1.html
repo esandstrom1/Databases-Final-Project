@@ -1,0 +1,31 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Image</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function handleClick(event) {
+            var x = event.pageX - $('#image').offset().left;
+            var y = event.pageY - $('#image').offset().top;
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                url: '/process_click',
+                data: JSON.stringify({ 'x': x, 'y': y }),
+                success: function(response) {
+                    alert(response.result);
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <h1>United States Death Statistics</h1>
+    <h2>1999-2017</h2>
+    <img id="image" src="../static/map.png" alt="Clickable Image" onclick="handleClick(event)">
+</body>
+</html>

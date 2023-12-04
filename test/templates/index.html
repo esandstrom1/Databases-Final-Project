@@ -1,0 +1,54 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Image</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function handleClick(event) {
+            var x = event.pageX - $('#image').offset().left;
+            var y = event.pageY - $('#image').offset().top;
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                url: '/process_click',
+                data: JSON.stringify({ 'x': x, 'y': y }),
+                success: function(response) {
+                    // Update the console output
+                    $('#console').text(response.result);
+                }
+            });
+        }
+    </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #image-container {
+            position: relative;
+        }
+
+        #console {
+            width: 200px; /* Adjust the width as needed */
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>United States Death Statistics</h1>
+    <h2>1999-2017</h2>
+    <div id="image-container">
+        <img id="image" src="{{ url_for('static', filename='map.png') }}" alt="Clickable Image" onclick="handleClick(event)">
+    </div>
+    <div id="console"></div>
+</body>
+</html>
