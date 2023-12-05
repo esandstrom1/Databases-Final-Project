@@ -17,15 +17,52 @@
                 url: '/process_click',
                 data: JSON.stringify({ 'x': x, 'y': y }),
                 success: function(response) {
-                    alert(response.result);
+                    // Update the console output
+                    $('#console').text(response.result);
                 }
             });
         }
     </script>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #image-container {
+            position: relative;
+        }
+
+        #console {
+            width: 200px; /* Adjust the width as needed */
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-left: 20px;
+            margin-top: 20px;
+        }
+        
+        /* Add the CSS for the large box */
+        #output-box {
+            width: 350px; /* Adjust the width as needed */
+            height: 350px; /* Adjust the height as needed */
+            border: 1px solid #000;
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: #fff;
+            overflow: auto;
+            white-space: pre-wrap;
+        }
+    </style>
 </head>
 <body>
     <h1>United States Death Statistics</h1>
     <h2>1999-2017</h2>
-    <img id="image" src="../static/map.png" alt="Clickable Image" onclick="handleClick(event)">
+    <div id="image-container">
+        <img id="image" src="{{ url_for('static', filename='map.png') }}" alt="Clickable Image" onclick="handleClick(event)">
+    </div>
+    <!-- Add the large box for output -->
+    <div id="output-box"></div>
 </body>
 </html>

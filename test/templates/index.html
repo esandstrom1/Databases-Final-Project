@@ -34,12 +34,17 @@
             position: relative;
         }
 
+        /* Add this CSS to move the console to the right of the image */
         #console {
-            width: 200px; /* Adjust the width as needed */
+            width: 300px; /* Adjust the width as needed */
+            height: 500px;
             padding: 10px;
             border: 1px solid #ccc;
             margin-left: 20px;
-            margin-top: 20px;
+            margin-top: 100px;
+            position: absolute;
+            top: 0;
+            right: 20px; /* Adjust the distance from the right as needed */
         }
     </style>
 </head>
@@ -49,6 +54,8 @@
     <div id="image-container">
         <img id="image" src="{{ url_for('static', filename='map.png') }}" alt="Clickable Image" onclick="handleClick(event)">
     </div>
-    <div id="console"></div>
+    <div id="console">
+        {{ results_html | safe }}
+    </div>
 </body>
 </html>
