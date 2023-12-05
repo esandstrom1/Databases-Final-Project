@@ -5,25 +5,25 @@
 
 import sqlite3
 
-def print_state(state: str, year:int):
+def print_state(state: str, year:str):
     conn = sqlite3.connect('causes.db')
     cursor = conn.cursor()
 
     #print("\n\n\n\n\n\n\n\n\n\n")
 
-    invalid = True
-    while invalid:
+    # invalid = True
+    # while invalid:
         #num_results = int(input("Return 5 or 10 results? (5 or 10): "))
-        num_results = 10
-        if num_results == 5 or num_results == 10:
-            invalid = False 
+    num_results = 10
+        # if num_results == 5 or num_results == 10:
+        #     invalid = False 
 
 
     #while 1:
         # state = input("Enter the name of a state or 'all' to see results for any state\n")
         # year = input("Enter a year or 'all' to see results for any year\n")
-    state = "Alaska"
-    year = "2001"
+    #state = "Alaska"
+    #year = "2001"
 
     results_html = ""
     if state == "all":
