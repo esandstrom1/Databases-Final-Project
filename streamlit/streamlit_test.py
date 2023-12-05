@@ -52,7 +52,12 @@ def your_function(x, y):
 
 def main():
     # Streamlit app starts here
-    st.title('Most deaths')
+    st.title('United States Death Statistics \n 1999-2017')
+
+    # years slider 
+    # st.subheader('Years')
+    years_range = st.slider('Years', value=[1999, 2017], min_value=1999,
+        max_value = 2017)
 
     # Display the image
     image = 'map.jpg'  # Replace 'your_image.jpg' with the path to your image file
