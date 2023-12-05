@@ -66,6 +66,7 @@ def main():
     y = value['y']
 
     result = your_function(x, y)
+    st.write(result)
 
 if __name__ == '__main__':
     main()
