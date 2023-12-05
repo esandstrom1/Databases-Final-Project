@@ -18,7 +18,8 @@
                 data: JSON.stringify({ 'x': x, 'y': y }),
                 success: function(response) {
                     // Update the console output
-                    $('#console').text(response.result);
+                    var formattedResult = response.result.replace(/\n/g, '<br>');
+                    $('#console').html(formattedResult);
                 }
             });
         }
