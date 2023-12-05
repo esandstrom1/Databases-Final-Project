@@ -25,9 +25,9 @@ def call_state(x, y):
     try:
         result = print_state("Alaska", 2001)
 
+
         result_and_coordinates = f"Clicked at ({x}, {y})\n" + result
         return result_and_coordinates
-
     except subprocess.CalledProcessError as e:
         return f"Error: {e}"
 
