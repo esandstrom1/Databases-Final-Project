@@ -34,7 +34,7 @@ def write_x_y(x, y):
     st.write(x, y)
 
 # Streamlit app starts here
-st.title('Clickable Image App')
+st.title('Most deaths')
 
 # Display the image
 image = 'map.jpg'  # Replace 'your_image.jpg' with the path to your image file
