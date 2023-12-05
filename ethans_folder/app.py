@@ -31,6 +31,7 @@ def your_function(x, y):
         #result = subprocess.check_output(["python3", "user_query.py"], universal_newlines=True)
         result = print_state("Alaska", 2001)
         #result = result.replace('\n', '<br>')
+        print(result)
         return result
     except subprocess.CalledProcessError as e:
         return f"Error: {e}"
