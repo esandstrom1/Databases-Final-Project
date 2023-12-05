@@ -14,7 +14,7 @@
             $.ajax({
                 type: 'POST',
                 contentType: 'application/json;charset=UTF-8',
-                url: '/process_click',
+                url: '/on_click',
                 data: JSON.stringify({ 'x': x, 'y': y }),
                 success: function(response) {
                     // Update the console output

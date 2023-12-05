@@ -12,25 +12,19 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/process_click', methods=['POST'])
-def process_click():
+@app.route('/on_click', methods=['POST'])
+def on_click():
     data = request.get_json()
     x = data['x']
     y = data['y']
-    # Call your Python function with the x and y coordinates
-    result = your_function(x, y)
-    #result = result.replace('\n', '<br>')
+    result = call_state(x, y)
     return {'result': result}
 
 
-def your_function(x, y):
-    # Your Python logic based on the clicked coordinates
-    # Replace this with your actual functionality
+def call_state(x, y):
     try:
-        # Call the "query.py" program and capture its output
-        #result = subprocess.check_output(["python3", "user_query.py"], universal_newlines=True)
         result = print_state("Alaska", 2001)
-        #result = result.replace('\n', '<br>')
+        #result_and_coordinates = f"Clicked at ({x}, {y})" + result
         return result
     except subprocess.CalledProcessError as e:
         return f"Error: {e}"
@@ -64,4 +58,4 @@ def your_function(x, y):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8000)
