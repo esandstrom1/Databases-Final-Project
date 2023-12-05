@@ -24,43 +24,15 @@ def on_click():
 def call_state(x, y):
     try:
         result = print_state("Alaska", 2001)
-<<<<<<< HEAD
+
         result_and_coordinates = f"Clicked at ({x}, {y})\n" + result
         return result_and_coordinates
-=======
-        #result = result.replace('\n', '<br>')
-        print(result)
-        return result
->>>>>>> a713f016e0c30f0ac99da70ee27b13adc2571524
+
     except subprocess.CalledProcessError as e:
         return f"Error: {e}"
 
     return f"Clicked at ({x}, {y})"
 
-
-# def test_query():
-#     conn = sqlite3.connect('causes.db')
-#     cursor = conn.cursor()
-
-#     query = f"SELECT Cause_Name, Deaths, Year FROM DATA WHERE Cause_Name != 'All causes' ORDER BY Deaths DESC LIMIT {5}"
-    
-#     # Fetch all results from the query
-#     result = cursor.fetchall()
-
-#     # Convert the query result to a JSON-serializable format
-#     # For example, convert the result to a list of dictionaries
-#     columns = [col[0] for col in cursor.description]  # Get column names
-#     json_result = []
-#     for row in result:
-#         json_result.append(dict(zip(columns, row)))
-
-#     # Serialize the JSON data
-#     serialized_data = json.dumps(json_result)
-
-#     # Close the database connection
-#     conn.close()
-
-#     return serialized_data
 
 
 if __name__ == '__main__':
