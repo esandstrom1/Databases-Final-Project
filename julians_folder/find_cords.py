@@ -40,7 +40,7 @@ def main():
   states_2letter_in_map_order = [
     'AK', 'ME',
     'WI', 'VT', 'NH',
-    'WA', 'ID', 'MT', 'ND', 'MN' 'IL', 'MI',
+    'WA', 'ID', 'MT', 'ND', 'MN', 'IL', 'MI',
     'NY', 'MA',
     'OR', 'NV', 'WY', 'SD', 'IA', 'IN', 'OH', 'PA', 'NJ', 'CT', 'RI',
     'CA', 'UT', 'CO', 'NE', 'MO', 'KY', 'WV', 'VA', 'MD', 'DE',
