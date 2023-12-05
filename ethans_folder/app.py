@@ -24,14 +24,10 @@ def on_click():
 def call_state(x, y):
     try:
         result = print_state("Alaska", 2001)
-<<<<<<< HEAD
-        result_and_coordinates = f"Clicked at ({x}, {y})\n" + result
-        return result_and_coordinates
-=======
+
         #result = result.replace('\n', '<br>')
         print(result)
         return result
->>>>>>> a713f016e0c30f0ac99da70ee27b13adc2571524
     except subprocess.CalledProcessError as e:
         return f"Error: {e}"
 
