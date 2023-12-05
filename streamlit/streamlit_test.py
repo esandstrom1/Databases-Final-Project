@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_image_coordinates import streamlit_image_coordinates
 import json
+from user_query import print_state
+import subprocess
 
 # Define functions to be executed based on clicked areas
 
@@ -33,22 +35,43 @@ def in_range_x_y(x, y, leftx, rightx, topy, bottomy):
 def write_x_y(x, y):
     st.write(x, y)
 
-# Streamlit app starts here
-st.title('Most deaths')
+def your_function(x, y):
+    # Your Python logic based on the clicked coordinates
+    # Replace this with your actual functionality
+    try:
+        # Call the "query.py" program and capture its output
+        #result = subprocess.check_output(["python3", "user_query.py"], universal_newlines=True)
+        result = print_state("Alaska", 2001)
+        #result = result.replace('\n', '<br>')
+        print(result)
+        return result
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e}"
 
-# Display the image
-image = 'map.jpg'  # Replace 'your_image.jpg' with the path to your image file
-#st.image(image, use_column_width=True)
+    return f"Clicked at ({x}, {y})"
 
-# Capture mouse clicks on the image
-value = streamlit_image_coordinates(image, width=800)
+def main():
+    # Streamlit app starts here
+    st.title('United States Death Statistics \n 1999-2017')
 
-# get x y cords
-x = value['x']
-y = value['y']
+    # years slider 
+    # st.subheader('Years')
+    years_range = st.slider('Years', value=[1999, 2017], min_value=1999,
+        max_value = 2017)
 
-write_x_y(x, y)
+    # Display the image
+    image = 'map.jpg'  # Replace 'your_image.jpg' with the path to your image file
+    #st.image(image, use_column_width=True)
 
-if in_range_x_y(x, y, 140,180,140,180):
-    function_area1()
+    # Capture mouse clicks on the image
+    value = streamlit_image_coordinates(image, width=800)
 
+    # get x y cords
+    x = value['x']
+    y = value['y']
+
+    result = your_function(x, y)
+    st.write(result)
+
+if __name__ == '__main__':
+    main()
