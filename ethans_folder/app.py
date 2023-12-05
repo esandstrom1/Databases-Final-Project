@@ -23,7 +23,7 @@ def on_click():
 
 def call_state(x, y):
     try:
-        result = print_state("Alaska", 2001)
+        result = print_state("Ohio", "2005")
 
 
         result_and_coordinates = f"Clicked at ({x}, {y})\n" + result
