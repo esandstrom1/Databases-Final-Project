@@ -79,6 +79,7 @@ def main():
         y = value['y']
 
         result = your_function(x, y)
+        
     with col3:
         st.write('Output')
         st.write(x, y)
