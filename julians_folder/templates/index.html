@@ -1,0 +1,103 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickable Image</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        function onUpdate(event)
+        {
+            var sliderYear = $('#year-slider').val();
+
+            var x = 0;
+            var y = 0;
+
+            //sliderChange calls with null event
+            //If the event isn't null, it's a click event on the map
+            if(event !== null)
+            {
+                x = event.pageX - $('#image').offset().left;
+                y = event.pageY - $('#image').offset().top;
+            }
+
+            $.ajax({
+                type: 'POST',
+                contentType: 'application/json;charset=UTF-8',
+                url: '/on_update',
+                data: JSON.stringify({'x': x, 'y': y, 'year': sliderYear}),
+                success: function(response) {
+                    // Update the console output
+
+                    //Replace the newline chars with html breaks
+                    var formatted = response.result.replace(/\n/g, '<br>');
+                    $('#console').html(formatted);
+                }
+            });
+        }
+        //If the slider was updated
+        function sliderChange()
+        {
+            var sliderYear = $('#year-slider').val();
+            $('#slider-value').text(sliderYear);
+            onUpdate(null);
+        }
+    </script>
+    <style>
+        body
+        {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #aaa;
+        }
+
+        #image-container
+        {
+            position: relative;
+            margin: 20px;
+            margin-top: 0px;
+        }
+
+        #console
+        {
+            width: 300px;
+            height: 300px;
+            padding: 10px;
+            border: 10px solid #ccc;
+            margin-left: 20px;
+            margin-top: 100px;
+            position: absolute;
+            top: 120px;
+            right: 20px;
+            font-size: 20px;
+            color: #f00;
+            background-color: #000;
+        }
+        #slider-container
+        {
+            margin: 20px;
+        }
+        #year-slider
+        {
+            width: 500px; /* Adjust the width as needed */
+            font-size: 16px; /* Adjust the font size as needed */
+        }
+    </style>
+</head>
+<body>
+    <h1>United States Death Statistics</h1>
+    <h2>1999-2017</h2>
+    <div class="slider-container">
+        <input type="range" id="year-slider" min="1999" max="2017" step="1" value="1999" oninput="sliderChange()">
+        <p>Year: <span id="slider-value">1999</span></p>
+    </div>
+    <div id="image-container">
+        <img id="image" src="{{ url_for('static', filename='map.png') }}" alt="Clickable Image" onclick="onUpdate(event)">
+    </div>
+    <div id="console">
+        {{ results_html | safe }}
+    </div>
+</body>
+</html>
