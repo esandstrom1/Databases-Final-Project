@@ -4,6 +4,9 @@ import sqlite3
 from user_query import print_state
 import subprocess
 
+#local 
+from find_cords import build_cords
+
 global_state = "Ohio"
 
 app = Flask(__name__)
@@ -20,8 +23,8 @@ def on_update():
     x = data['x']
     y = data['y']
     year = data['year']
-    #result = call_state(x, y, year)
-    result = print_cords(x, y)
+    result = call_state(x, y, year)
+    #result = print_cords(x, y)
     return {'result': result}
 
 def print_cords(x, y):
