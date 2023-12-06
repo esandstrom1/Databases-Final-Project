@@ -11,18 +11,22 @@ def build_cords(org_x, org_y, org_count):
   x = org_x
   y = org_y
 
-  origin = [x,y]
 
   for i in range(count):
-    coordinates.append(origin)
+    coordinates.append([x, org_y])
+    #print(f'cordinates: {coordinates}')
 
-    x_second = origin[0] + width
-    y_second = origin[1] + height
+    x += width
+    y = org_y + height
 
-    coordinates.append([x_second, y_second])
+    #print(f'x_second {x}  y_second {y}')
 
-    origin[0] += width + spacer
+    coordinates.append([x, y])
+    #print(f'cordinates 2: {coordinates}')
 
+    x+=spacer
+
+  # print(f'from build cords {coordinates}')
   return(coordinates)
 
 def build_state_with_cords():
@@ -41,8 +45,10 @@ def build_state_with_cords():
   }
 
   states_2letter_in_map_order = [
-    'AK', 'ME',
-    'WI', 'VT', 'NH',
+    'AK', 
+    'ME',
+    'WI', 
+    'VT', 'NH',
     'WA', 'ID', 'MT', 'ND', 'MN', 'IL', 'MI',
     'NY', 'MA',
     'OR', 'NV', 'WY', 'SD', 'IA', 'IN', 'OH', 'PA', 'NJ', 'CT', 'RI',
@@ -77,10 +83,13 @@ def build_state_with_cords():
     for c in cords2:
       cords.append(c)
 
+  # print(cords)
   full_state_name_with_cords = {}
   j = 0
+    
   for i in range(len(states_in_map_order)):
     cord_tup = (cords[j], cords[j+1])
+    # print(cord_tup)
     full_state_name_with_cords[states_in_map_order[i]] = cord_tup
     j+=2
 
