@@ -1,41 +1,15 @@
 import streamlit as st
 from streamlit_image_coordinates import streamlit_image_coordinates
 import json
-from user_query import print_state
 import subprocess
+import pandas as pd
 
-# Define functions to be executed based on clicked areas
+# local 
+from find_cords import build_state_with_cords
+from user_query import print_state, print_state2
 
-
-def function_area1():
-    st.write("You clicked on Area 1")
-    # Perform actions for Area 1 click
-
-
-def function_area2():
-    st.write("You clicked on Area 2")
-    # Perform actions for Area 2 click
-
-
-def function_area3():
-    st.write("You clicked on Area 3")
-    # Perform actions for Area 3 click
-
-
-def in_range_x_y(x, y, leftx, rightx, topy, bottomy):
-    if x < leftx:
-        return False
-    if x > rightx:
-        return False
-    if y > topy:
-        return False
-    if y < bottomy:
-        return False
-    return True
-
-
-def write_x_y(x, y):
-    st.write(x, y)
+# global vars
+global_state = "Ohio"
 
 
 def your_function(x, y):
@@ -53,6 +27,25 @@ def your_function(x, y):
 
     return f"Clicked at ({x}, {y})"
 
+def call_state(x, y, year):
+    global global_state
+    states_with_cords = build_state_with_cords()
+    for st, cord_tup in states_with_cords.items():
+        p1, p2 = cord_tup
+        if x >= p1[0] and x <= p2[0]:
+            if y >= p1[1] and y <= p2[1]:
+                state = st
+                global_state = st
+        else:
+            state = global_state
+
+    try:
+        result = print_state2(state, year)
+        #result_and_coordinates = f"Clicked at ({x}, {y})\n" + result
+        return result
+    except subprocess.CalledProcessError as e:
+        return f"Error: {e}"
+
 
 def main():
     # Streamlit app starts here
@@ -62,33 +55,44 @@ def main():
         layout="wide",
         initial_sidebar_state="expanded",
     )
-    # create columns
-    col1, col2, col3 = st.columns([.2, .6, .2])
-    # years slider
-    years_range = col1.select_slider('Select a year:', options=[
-                                     i for i in range(1999, 2018)])
-    display_values_range = col1.slider('Select result range', value=[0, 10],
-                                       min_value=0, max_value=10)
 
-    with col2:
+    # header of the page
+    st.header("United States Death Statistics \n 1999-2017")
+
+    # create columns
+    col1, col2 = st.columns([.75, .25])
+    
+    # sidebar things
+    st.sidebar.title("Settings")
+    # years slider
+    year = st.sidebar.select_slider('Select a year:', options=[
+                                    i for i in range(1999, 2018)])
+    display_values_range = st.sidebar.slider('Select result range', value=[0, 10],
+                                    min_value=0, max_value=10)
+        
+    with col1:
         # Display the image
         image = 'map.png'  # Replace 'your_image.jpg' with the path to your image file
         # st.image(image, use_column_width=True)
 
         # Capture mouse clicks on the image
-        value = streamlit_image_coordinates(image, width=700, height=500,
+        value = streamlit_image_coordinates(image, width=800,
                                             key='local')
 
         # get x y cords
         x = value['x']
         y = value['y']
 
-        result = your_function(x, y)
+        result, result_dict = call_state(x, y, year)
+        df = pd.DataFrame.from_dict(result_dict, orient='index')
+        st.bar_chart(df)
 
-    with col3:
+    with col2:
         st.write('Output')
         st.write(x, y)
-        st.write(result)
+        for r in result:
+            st.write(r)
+        
 
 
 if __name__ == '__main__':
