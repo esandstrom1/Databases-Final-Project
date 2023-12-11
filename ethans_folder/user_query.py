@@ -61,3 +61,24 @@ def print_state(state: str, year:str):
     conn.close()
     
     return results_html
+
+def state_total(state: str, year: str):
+    conn = sqlite3.connect('causes.db')
+    cursor = conn.cursor()
+
+    query = f"SELECT Deaths FROM DATA WHERE State=? AND Year=? AND Cause_Name == 'All causes' ORDER BY Deaths DESC LIMIT 1"
+    cursor.execute(query, (state, year,))
+    results = cursor.fetchall()
+    
+    ##print(f"{state} {year}")
+
+    if results:
+        total = f"{results[0][0]}"
+    #print(f"{total}")
+
+
+    conn.close()    
+    return total
+
+if __name__ == "__main__":
+    state_total("Alaska", "2005")
