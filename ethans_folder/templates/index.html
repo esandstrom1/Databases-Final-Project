@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clickable Image</title>
+    <title>Deaths in the US</title>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -141,7 +141,7 @@
         <p>Year: <span id="slider-value">1999</span></p>
     </div>
     <div id="image-container">
-        <img id="image" src="{{ url_for('static', filename='map.png') }}" alt="Clickable Image" onclick="onUpdate(event)">
+        <img id="image" src="{{ url_for('static', filename='map.png') }}" alt="map_image" onclick="onUpdate(event)">
     </div>
     <div id="console">
         {{ results_html | safe }}
