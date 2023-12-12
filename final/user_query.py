@@ -6,7 +6,7 @@
 import sqlite3
 
 def print_state(state: str, year:str):
-    conn = sqlite3.connect('causes.db')
+    conn = sqlite3.connect('final/causes.db')
     cursor = conn.cursor()
 
     #print("\n\n\n\n\n\n\n\n\n\n")
@@ -63,7 +63,7 @@ def print_state(state: str, year:str):
     return results_html
 
 def state_total(state: str, year: str):
-    conn = sqlite3.connect('causes.db')
+    conn = sqlite3.connect('final/causes.db')
     cursor = conn.cursor()
 
     query = f"SELECT Deaths FROM DATA WHERE State=? AND Year=? AND Cause_Name == 'All causes' ORDER BY Deaths DESC LIMIT 1"
