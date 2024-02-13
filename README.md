@@ -1,5 +1,7 @@
 Ethan Sandstrom and Julian Renton's United States Death Statistics Final Project
 
+Purpose: To provide a simple visual representation of causes of death in order to create awareness regarding trends in health in the United States.
+
 Requirements:
 sqlite3
 flask
